@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace UnitTest.TextAnalizerLibraryTest
             TextAnalyzer textAnalyzer = new TextAnalyzer();
             string[] str = new string[1];
             str[0] = text;
-            Dictionary<string, int> result = textAnalyzer.CalculateSequenceFrequences(str, length);
+            ConcurrentDictionary<string, int> result = textAnalyzer.CalculateSequenceFrequences(str, length);
             Assert.True(result.ContainsKey(expected_1) && result[expected_1] == expected_2);
         }
 

@@ -21,5 +21,10 @@ namespace TextAnalyzerLib
         /// 2. The file is to be accessed sequentially from beginning to end.
         /// </summary>
         public const FileOptions DefaultOptions = FileOptions.Asynchronous | FileOptions.SequentialScan;
+
+        /// <summary>
+        /// Max length for string sharding for parallel work
+        /// </summary>
+        public const int MaxStringLengthForParallel = 100000;
     }
 }

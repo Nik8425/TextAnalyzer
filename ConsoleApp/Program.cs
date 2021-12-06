@@ -22,11 +22,8 @@ namespace ConsoleApp
 
             //Analyze file
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            DocOperator docOperator = new DocOperator();
-            string[] lines = await docOperator.ReadAllLinesAsync(path, Encoding.UTF8);
-            TextAnalyzer textAnalyzer = new TextAnalyzer();
-            IEnumerable<KeyValuePair<string, int>> mostPopular = await textAnalyzer.GetMostPopularLetterLiteralsAsync(lines, 3, 10);
-
+            IEnumerable<KeyValuePair<string, int>> mostPopular = await AnalyzeFileAsync(path);
+            
             //Display results
             foreach (KeyValuePair<string, int> keyValuePair in mostPopular)
             {
@@ -37,6 +34,14 @@ namespace ConsoleApp
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             Console.WriteLine("Elapsed " + elapsedMs + " milliseconds.");
+        }
+
+        private static Task<IEnumerable<KeyValuePair<string, int>>> AnalyzeFileAsync(string path)
+        {
+            DocOperator docOperator = new DocOperator();
+            string[] lines = docOperator.ReadAllLines(path, Encoding.UTF8);
+            TextAnalyzer textAnalyzer = new TextAnalyzer();
+            return Task.FromResult(textAnalyzer.GetMostPopularLetterLiterals(lines, 3, 10));
         }
 
         private static string TryGetPathOrExit()

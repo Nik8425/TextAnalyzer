@@ -8,16 +8,16 @@ namespace Extension
 {
     public static class DictionaryExtension
     {
-        public static async Task<IEnumerable<KeyValuePair<TKey, TValue>>> GetTopPairsOrderedByValueAsync<TKey, TValue>
+        public static IEnumerable<KeyValuePair<TKey, TValue>> GetTopPairsOrderedByValue<TKey, TValue>
             (this Dictionary<TKey, TValue> dictionary, int top, bool descending = false)
         {
             if (descending)
             {
-                return await Task.FromResult(dictionary.OrderByDescending(t => t.Value).Take(top));
+                return dictionary.OrderByDescending(t => t.Value).Take(top);
             }
             else
             {
-                return await Task.FromResult(dictionary.OrderBy(t => t.Value).Take(top));
+                return dictionary.OrderBy(t => t.Value).Take(top);
             }
         }
 

@@ -8,8 +8,8 @@ namespace TextAnalyzerLib.Interfaces
 {
     public interface ITextAnalyzer
     {
-        public Task<Dictionary<string, int>> CalculateSequenceFrequencesAsync(string[] text, byte length);
+        public Dictionary<string, int> CalculateSequenceFrequences(string[] text, byte length);
 
-        public Task<IEnumerable<KeyValuePair<string, int>>> GetMostPopularLetterLiteralsAsync(string[] text, byte length, int top);
+        public IEnumerable<KeyValuePair<string, int>> GetMostPopularLetterLiterals(string[] text, byte length, int top);
     }
 }

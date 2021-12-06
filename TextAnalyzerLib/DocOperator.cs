@@ -10,12 +10,12 @@ namespace TextAnalyzerLib
 {
     public class DocOperator
     {
-        public Task<string[]> ReadAllLinesAsync(string path)
+        public string[] ReadAllLinesAsync(string path)
         {
-            return ReadAllLinesAsync(path, Encoding.UTF8);
+            return ReadAllLines(path, Encoding.UTF8);
         }
 
-        public async Task<string[]> ReadAllLinesAsync(string path, Encoding encoding)
+        public string[] ReadAllLines(string path, Encoding encoding)
         {
             var lines = new List<string>();
 
@@ -25,7 +25,7 @@ namespace TextAnalyzerLib
             using (var reader = new StreamReader(stream, encoding))
             {
                 string line;
-                while ((line = await reader.ReadLineAsync()) != null)
+                while ((line = reader.ReadLine()) != null)
                 {
                     lines.Add(line);
                 }

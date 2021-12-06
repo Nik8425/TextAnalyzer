@@ -24,10 +24,10 @@ namespace TextAnalyzerLib
         /// <param name="length"></param>
         /// <param name="top"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<KeyValuePair<string, int>>> GetMostPopularLetterLiteralsAsync(string[] text, byte length, int top)
+        public IEnumerable<KeyValuePair<string, int>> GetMostPopularLetterLiterals(string[] text, byte length, int top)
         {
-            Dictionary<string, int> frequences = await CalculateSequenceFrequencesAsync(text, length);
-            return await frequences.GetTopPairsOrderedByValueAsync(top, true);
+            Dictionary<string, int> frequences = CalculateSequenceFrequences(text, length);
+            return frequences.GetTopPairsOrderedByValue(top, true);
         }
 
         /// <summary>
@@ -36,12 +36,6 @@ namespace TextAnalyzerLib
         /// <param name="length">Length of literal</param>
         /// <param name="text">Text for analyze</param>
         /// <returns>Frequences of fixed size sequences</returns>
-        public Task<Dictionary<string, int>> CalculateSequenceFrequencesAsync(string[] text, byte length)
-        {
-            Dictionary<string, int> frequences = CalculateSequenceFrequences(text, length);
-            return Task.FromResult<Dictionary<string, int>>(frequences);
-        }
-
         public Dictionary<string, int> CalculateSequenceFrequences(string[] text, byte length)
         {
             string str = string.Empty;
